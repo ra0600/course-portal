@@ -8,11 +8,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- CSS STYLING ----
-# ---- CSS STYLING ----
+# ---- CUSTOM CSS ----
 st.markdown("""
 <style>
-/* Main dark blue background */
+/* Dark blue gradient background with subtle floating shapes */
 .stApp {
     background: radial-gradient(circle at 20% 20%, rgba(79,209,197,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 40%),
@@ -20,34 +19,57 @@ st.markdown("""
     color: #ffffff;
 }
 
-/* Black download buttons with white text */
-.stButton>button {
-    color: #ffffff !important;        /* white text */
-    background-color: #000000 !important; /* black background */
-    border-radius: 30px;
-    font-weight: 600;
-    padding: 12px 25px;
-    box-shadow: none;
-    transition: transform 0.3s, box-shadow 0.3s;
+/* Floating animated shapes */
+.stApp::before, .stApp::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    animation: float 18s ease-in-out infinite alternate;
 }
-.stButton>button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(79,209,197,0.4);
+.stApp::before { background: rgba(79,209,197,0.25); top:-120px; left:-120px; }
+.stApp::after { background: rgba(14,165,233,0.25); bottom:-150px; right:-150px; animation-delay:6s; }
+@keyframes float { from{transform:translateY(0px) translateX(0px)} to{transform:translateY(60px) translateX(40px)} }
+
+/* Module card styling */
+.module-card {
+    background: rgba(17,27,51,0.75);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
 }
 
-/* Announcements text in white */
-.announcement-text {
+/* Download buttons as text links */
+.stButton>button {
+    color: #ffffff !important;      /* white text */
+    background-color: transparent !important;  /* remove button fill */
+    border: none !important;        /* remove border */
+    padding: 0 !important;          /* remove padding */
+    font-weight: 600;               /* bold text */
+    text-decoration: underline;     /* underline like a link */
+    cursor: pointer;
+}
+.stButton>button:hover {
+    color: #4fd1c5 !important;      /* hover color */
+    text-decoration: none;
+}
+
+/* Announcements styling */
+.stInfo p, .announcement-text {
     color: #ffffff !important;
     font-weight: 500;
 }
 
-/* Module card styling */
-.module-card {
-    background: #000000;  /* pure black */
-    padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 20px;
+/* Hero text */
+.hero-text h1, .hero-text p {
     color: #ffffff;
+    text-align: center;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -71,9 +93,9 @@ if st.session_state.authenticated:
 
     # Hero Section
     st.markdown("""
-    <div class="hero-text" style="text-align:center;padding:50px 20px">
-        <h1 style="font-size:48px;color:#4fd1c5;font-weight:700">Strategic Investment Banking Solutions</h1>
-        <p style="max-width:800px;margin:auto;color:#cbd5e1;font-size:18px">
+    <div class="hero-text" style="padding:50px 20px">
+        <h1 style="font-size:48px;font-weight:700;color:#4fd1c5;">Strategic Investment Banking Solutions</h1>
+        <p style="max-width:800px;margin:auto;font-size:18px;color:#cbd5e1;">
         Access your modules, videos, and activities for each course. Explore resources designed for professional growth in finance.
         </p>
     </div>
@@ -82,7 +104,7 @@ if st.session_state.authenticated:
     # Announcements
     st.subheader("📢 Announcements")
     st.markdown("""
-    <div class="announcement-text" style="line-height:1.6;">
+    <div class="announcement-text">
     <ul>
     <li>Course will begin next week.</li>
     <li>Modules and resources will be updated regularly.</li>
@@ -91,12 +113,12 @@ if st.session_state.authenticated:
     </div>
     """, unsafe_allow_html=True)
 
-    # Tabs for 4 courses
+    # Tabs for Courses
     tab1, tab2, tab3, tab4 = st.tabs([
         "Investment Banking", "Financial Services", "Business Ethics", "Business Strategy"
     ])
 
-    # ---- Investment Banking ----
+    # ---- Investment Banking Tab ----
     with tab1:
         st.header("Investment Banking Modules")
         ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
@@ -105,7 +127,12 @@ if st.session_state.authenticated:
                 st.markdown('<div class="module-card">', unsafe_allow_html=True)
                 if os.path.exists(pdf):
                     with open(pdf, "rb") as f:
-                        st.download_button(label=f"Download {pdf}", data=f, file_name=pdf, mime="application/pdf")
+                        st.download_button(
+                            label=f"Download {pdf}",
+                            data=f,
+                            file_name=pdf,
+                            mime="application/pdf",
+                        )
                 else:
                     st.warning(f"{pdf} not found.")
                 st.markdown('</div>', unsafe_allow_html=True)
@@ -116,21 +143,17 @@ if st.session_state.authenticated:
         st.header("Activities")
         st.markdown('<div class="module-card">Activities for Investment Banking will be added here.</div>', unsafe_allow_html=True)
 
-    # ---- Financial Services ----
+    # ---- Financial Services Tab ----
     with tab2:
         st.header("Financial Services Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
 
-    # ---- Business Ethics ----
+    # ---- Business Ethics Tab ----
     with tab3:
         st.header("Business Ethics Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
 
-    # ---- Business Strategy ----
+    # ---- Business Strategy Tab ----
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
-
-
-
-
