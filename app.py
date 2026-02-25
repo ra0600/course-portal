@@ -10,13 +10,11 @@ PASSWORD = "bbafs23"
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
-# Only show login if NOT authenticated
+# Show login if not authenticated
 if not st.session_state.authenticated:
     st.title("Course Portal Login")
     password_input = st.text_input("Enter Access Code", type="password")
-    login_clicked = st.button("Login")
-    
-    if login_clicked:
+    if st.button("Login"):
         if password_input == PASSWORD:
             st.session_state.authenticated = True
         else:
@@ -24,8 +22,6 @@ if not st.session_state.authenticated:
 
 # Show portal content ONLY if authenticated
 if st.session_state.authenticated:
-    # HIDE login field completely by using container
-    st.empty()  # this removes the login input visually
     st.title("Welcome to My Course Portal")
     st.write("This portal will contain modules, videos, activities and resources.")
 
@@ -33,26 +29,23 @@ if st.session_state.authenticated:
     st.write("Course will begin next week.")
 
     st.header("Module Section")
-# Path to your PDF files
-pdf_files = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
+    # ----- PDF DOWNLOAD BUTTONS -----
+    pdf_files = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
 
-for pdf in pdf_files:
-    if os.path.exists(pdf):
-        with open(pdf, "rb") as f:
-            st.download_button(
-                label=f"Download {pdf}",
-                data=f,
-                file_name=pdf,
-                mime="application/pdf"
-            )
-    else:
-        st.write(f"{pdf} not found.")
+    for pdf in pdf_files:
+        if os.path.exists(pdf):
+            with open(pdf, "rb") as f:
+                st.download_button(
+                    label=f"Download {pdf}",
+                    data=f,
+                    file_name=pdf,
+                    mime="application/pdf"
+                )
+        else:
+            st.write(f"{pdf} not found.")
 
     st.header("Video Section")
     st.write("Video links will be added soon.")
 
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
-
-
-
