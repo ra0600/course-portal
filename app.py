@@ -102,11 +102,15 @@ if st.session_state.authenticated:
 
     # Announcements
     st.subheader("📢 Announcements")
-    st.info("""
-    - Course will begin next week.  
-    - Modules and resources will be updated regularly.  
-    - Check back here for latest news and updates.  
-    """)
+    st.markdown("""
+    <div style="color: #ffffff; font-weight:500; line-height:1.6;">
+    <ul>
+    <li>Course will begin next week.</li>
+    <li>Modules and resources will be updated regularly.</li>
+    <li>Check back here for latest news and updates.</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Tabs for Courses
     tab1, tab2, tab3, tab4 = st.tabs([
@@ -147,3 +151,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
