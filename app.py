@@ -16,9 +16,6 @@ st.markdown("""
 .module-card {
     background: rgba(17,27,51,0.75);
     padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255,255,255,0.06);
     backdrop-filter: blur(10px);
 }
 
@@ -63,3 +60,4 @@ if st.session_state.authenticated:
         else:
             st.warning(f"{pdf} not found.")
         st.markdown('</div>', unsafe_allow_html=True)
+
