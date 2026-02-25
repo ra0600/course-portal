@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 st.set_page_config(page_title="My Course Portal")
 
@@ -32,8 +33,6 @@ if st.session_state.authenticated:
     st.write("Course will begin next week.")
 
     st.header("Module Section")
-    import os
-
 # Path to your PDF files
 pdf_files = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
 
@@ -54,4 +53,5 @@ for pdf in pdf_files:
 
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
+
 
