@@ -38,7 +38,7 @@ st.markdown("""
 /* Black download buttons always visible */
 .stButton>button {
     color: #000000 !important;        /* black text */
-    background-color: #ffffff !important; /* white background */
+    background-color: #ffffff !important; /* black background */
     border-radius: 30px;
     font-weight: 600;
     padding: 12px 25px;
@@ -152,3 +152,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
