@@ -131,10 +131,11 @@ if st.session_state.authenticated:
     with tab1:
     st.header("Investment Banking Modules")
     ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
+
     for pdf in ib_pdfs:
         st.markdown('<div class="module-card">', unsafe_allow_html=True)
         if os.path.exists(pdf):
-            # Plain white text link for download
+            # White download link
             st.markdown(
                 f'<a href="{pdf}" download style="color:white;text-decoration:none;font-weight:600;">{pdf}</a>',
                 unsafe_allow_html=True
@@ -143,11 +144,11 @@ if st.session_state.authenticated:
             st.warning(f"{pdf} not found.")
         st.markdown('</div>', unsafe_allow_html=True)
 
-        st.header("Videos")
-        st.markdown('<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
+    st.header("Videos")
+    st.markdown('<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
 
-        st.header("Activities")
-        st.markdown('<div class="module-card">Activities for Investment Banking will be added here.</div>', unsafe_allow_html=True)
+    st.header("Activities")
+    st.markdown('<div class="module-card">Activities for Investment Banking will be added here.</div>', unsafe_allow_html=True)
 
     # ---- Financial Services Tab ----
     with tab2:
@@ -163,6 +164,7 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
 
 
