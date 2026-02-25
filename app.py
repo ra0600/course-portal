@@ -9,9 +9,10 @@ st.set_page_config(
 )
 
 # ---- CSS STYLING ----
+# ---- CSS STYLING ----
 st.markdown("""
 <style>
-/* Main dark blue background with animated floating shapes */
+/* Main dark blue background */
 .stApp {
     background: radial-gradient(circle at 20% 20%, rgba(79,209,197,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 40%),
@@ -19,26 +20,10 @@ st.markdown("""
     color: #ffffff;
 }
 
-/* Floating animated shapes */
-.stApp::before, .stApp::after {
-    content: "";
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    filter: blur(120px);
-    z-index: -1;
-    animation: float 18s ease-in-out infinite alternate;
-}
-.stApp::before { background: rgba(79,209,197,0.25); top:-120px; left:-120px; }
-.stApp::after { background: rgba(14,165,233,0.25); bottom:-150px; right:-150px; animation-delay:6s; }
-
-@keyframes float { from{transform:translateY(0px) translateX(0px)} to{transform:translateY(60px) translateX(40px)} }
-
-/* Black download buttons always visible */
+/* Black download buttons with white text */
 .stButton>button {
-    color: #000000 !important;        /* black text */
-    background-color: #ffffff !important; /* black background */
+    color: #ffffff !important;        /* white text */
+    background-color: #000000 !important; /* black background */
     border-radius: 30px;
     font-weight: 600;
     padding: 12px 25px;
@@ -50,26 +35,21 @@ st.markdown("""
     box-shadow: 0 10px 25px rgba(79,209,197,0.4);
 }
 
+/* Announcements text in white */
+.announcement-text {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
 /* Module card styling */
 .module-card {
-    background: rgba(14,165,233,0.25);
+    background: rgba(17,27,51,0.75);
     padding: 20px;
     border-radius: 18px;
     margin-bottom: 20px;
     border: 1px solid rgba(255,255,255,0.06);
     backdrop-filter: blur(10px);
     color: #fff;
-}
-
-/* Announcements text */
-.stInfo p, .announcement-text {
-    color: #ffffff !important;
-    font-weight: 500;
-}
-
-/* Hero section text styling */
-.hero-text h1, .hero-text p {
-    color: #ffffff;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -152,5 +132,6 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
 
