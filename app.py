@@ -8,10 +8,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- DARK BLUE BACKGROUND, FLOATING SHAPES, BUTTON & ANNOUNCEMENTS STYLING ----
+# ---- CSS STYLING ----
 st.markdown("""
 <style>
-/* Main dark blue background with gradients */
+/* Main dark blue background with animated floating shapes */
 .stApp {
     background: radial-gradient(circle at 20% 20%, rgba(79,209,197,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 40%),
@@ -35,13 +35,10 @@ st.markdown("""
 
 @keyframes float { from{transform:translateY(0px) translateX(0px)} to{transform:translateY(60px) translateX(40px)} }
 
-/* Download buttons - black text on white background always */
-.stButton>button,
-.stButton>button:hover,
-.stButton>button:focus,
-.stButton>button:active {
-    color: #000000 !important;
-    background-color: #ffffff !important;
+/* Black download buttons always visible */
+.stButton>button {
+    color: #000000 !important;        /* black text */
+    background-color: #ffffff !important; /* white background */
     border-radius: 30px;
     font-weight: 600;
     padding: 12px 25px;
@@ -64,7 +61,13 @@ st.markdown("""
     color: #fff;
 }
 
-/* Hero section text */
+/* Announcements text */
+.stInfo p, .announcement-text {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+/* Hero section text styling */
 .hero-text h1, .hero-text p {
     color: #ffffff;
 }
@@ -101,7 +104,7 @@ if st.session_state.authenticated:
     # Announcements
     st.subheader("📢 Announcements")
     st.markdown("""
-    <div style="color: #ffffff; font-weight:500; line-height:1.6;">
+    <div class="announcement-text" style="line-height:1.6;">
     <ul>
     <li>Course will begin next week.</li>
     <li>Modules and resources will be updated regularly.</li>
@@ -110,12 +113,12 @@ if st.session_state.authenticated:
     </div>
     """, unsafe_allow_html=True)
 
-    # Tabs for Courses
+    # Tabs for 4 courses
     tab1, tab2, tab3, tab4 = st.tabs([
         "Investment Banking", "Financial Services", "Business Ethics", "Business Strategy"
     ])
 
-    # ---- Investment Banking Tab ----
+    # ---- Investment Banking ----
     with tab1:
         st.header("Investment Banking Modules")
         ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
@@ -135,17 +138,17 @@ if st.session_state.authenticated:
         st.header("Activities")
         st.markdown('<div class="module-card">Activities for Investment Banking will be added here.</div>', unsafe_allow_html=True)
 
-    # ---- Financial Services Tab ----
+    # ---- Financial Services ----
     with tab2:
         st.header("Financial Services Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
 
-    # ---- Business Ethics Tab ----
+    # ---- Business Ethics ----
     with tab3:
         st.header("Business Ethics Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
 
-    # ---- Business Strategy Tab ----
+    # ---- Business Strategy ----
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
