@@ -8,10 +8,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- DARK BLUE BACKGROUND WITH FLOATING SHAPES ----
+# ---- DARK BLUE BACKGROUND, FLOATING SHAPES, BUTTON & ANNOUNCEMENTS STYLING ----
 st.markdown("""
 <style>
-/* Main background with radial gradients and dark blue */
+/* Main dark blue background with gradients */
 .stApp {
     background: radial-gradient(circle at 20% 20%, rgba(79,209,197,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 40%),
@@ -35,13 +35,17 @@ st.markdown("""
 
 @keyframes float { from{transform:translateY(0px) translateX(0px)} to{transform:translateY(60px) translateX(40px)} }
 
-/* Buttons for download - black text, white background */
-.stButton>button {
+/* Download buttons - black text on white background always */
+.stButton>button,
+.stButton>button:hover,
+.stButton>button:focus,
+.stButton>button:active {
     color: #000000 !important;
-    background: #ffffff !important;
+    background-color: #ffffff !important;
     border-radius: 30px;
     font-weight: 600;
     padding: 12px 25px;
+    box-shadow: none;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 .stButton>button:hover {
@@ -60,13 +64,7 @@ st.markdown("""
     color: #fff;
 }
 
-/* Announcements info box - white text */
-.stInfo p {
-    color: #ffffff !important;
-    font-weight: 500;
-}
-
-/* Hero section text styling */
+/* Hero section text */
 .hero-text h1, .hero-text p {
     color: #ffffff;
 }
@@ -151,4 +149,3 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
-
