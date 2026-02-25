@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # ---- DARK FINANCE-THEMED BACKGROUND ----
-background_url = "https://images.pexels.com/photos/6696158/pexels-photo-6696158.jpeg"
+background_url = "https://www.dreamstime.com/chic-dual-color-background-seamless-blend-dark-navy-rich-royal-blue-perfect-sophisticated-elegant-aesthetic-image327881619"
 st.markdown(f"""
     <style>
     .stApp {{
@@ -125,3 +125,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown(f'<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
