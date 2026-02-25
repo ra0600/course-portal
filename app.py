@@ -3,27 +3,27 @@ import streamlit as st
 st.set_page_config(page_title="My Course Portal")
 
 # ---- PASSWORD PROTECTION ----
-PASSWORD = "bbafs23"  # change as you like
+PASSWORD = "bbafs23"
 
 # Initialize session variables
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
-if "page" not in st.session_state:
-    st.session_state.page = "login"
 
-# LOGIN PAGE
-if st.session_state.page == "login":
+# Show login only if not authenticated
+if not st.session_state.authenticated:
     st.title("Course Portal Login")
     password = st.text_input("Enter Access Code", type="password")
-    if st.button("Login"):
+    login_clicked = st.button("Login")
+    
+    if login_clicked:
         if password == PASSWORD:
             st.session_state.authenticated = True
-            st.session_state.page = "portal"  # go to portal page
+            st.experimental_rerun()  # reload the page after success
         else:
             st.error("Incorrect Access Code")
 
-# PORTAL PAGE
-if st.session_state.page == "portal" and st.session_state.authenticated:
+# Show portal only if authenticated
+if st.session_state.authenticated:
     st.title("Welcome to My Course Portal")
     st.write("This portal will contain modules, videos, activities and resources.")
 
