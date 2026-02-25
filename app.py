@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # ---- BACKGROUND IMAGE ----
-background_url = "https://images.unsplash.com/photo-1556740738-b6a63e27c4df"  # professional finance image
+background_url = "https://images.pexels.com/photos/6696158/pexels-photo-6696158.jpeg"  # professional finance image
 st.markdown(
     f"""
     <style>
@@ -90,3 +90,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.write("Modules and resources will be added soon.")
+
