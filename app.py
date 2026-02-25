@@ -22,7 +22,7 @@ if not st.session_state.authenticated:
 
 # Show portal content ONLY if authenticated
 if st.session_state.authenticated:
-    st.title("Welcome to My Course Portal")
+    st.title("Welcome to IBFS Course Portal")
     st.write("This portal will contain modules, videos, activities and resources.")
 
     st.header("Announcements")
@@ -49,5 +49,6 @@ if st.session_state.authenticated:
 
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
+
 
 
