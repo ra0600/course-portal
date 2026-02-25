@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ---- PASSWORD PROTECTION ----
-PASSWORD = "MBA2026"  # You can change this to any code you want
+PASSWORD = "bbafs23"  # You can change this to any code you want
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -18,3 +18,4 @@ if not st.session_state.authenticated:
             st.error("Incorrect Access Code")
     st.stop()
 # ---- END PASSWORD PROTECTION ----
+
