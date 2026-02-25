@@ -12,7 +12,7 @@ if "authenticated" not in st.session_state:
 
 # Show login if not authenticated
 if not st.session_state.authenticated:
-    st.title("Course Portal Login")
+    st.title("IBFS Course Portal Login")
     password_input = st.text_input("Enter Access Code", type="password")
     if st.button("Login"):
         if password_input == PASSWORD:
@@ -49,4 +49,5 @@ if st.session_state.authenticated:
 
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
+
 
