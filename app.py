@@ -8,9 +8,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- DARK BLUE BACKGROUND WITH FLOATING SHAPES ----
+# ---- DARK BLUE BACKGROUND WITH FLOATING SHAPES & STYLING ----
 st.markdown("""
 <style>
+/* Main background with radial gradients and dark blue */
 .stApp {
     background: radial-gradient(circle at 20% 20%, rgba(79,209,197,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 40%),
@@ -18,6 +19,7 @@ st.markdown("""
     color: #ffffff;
 }
 
+/* Floating animated shapes */
 .stApp::before, .stApp::after {
     content: "";
     position: fixed;
@@ -33,27 +35,36 @@ st.markdown("""
 
 @keyframes float { from{transform:translateY(0px) translateX(0px)} to{transform:translateY(60px) translateX(40px)} }
 
-/* Buttons for download - invisible, we use text links instead */
-.stButton>button { display:none; }
+/* Buttons for PDF downloads - black background, white text */
+.pdf-btn {
+    display:inline-block;
+    padding:10px 25px;
+    background-color:#000000;
+    color:#ffffff !important;
+    text-decoration:none;
+    border-radius:8px;
+    margin-bottom:10px;
+}
 
-/* Module card styling */
+/* Announcements styling */
+.stInfo p, .announcement {
+    color:#ffffff !important;
+    font-weight:500;
+    line-height:1.6;
+}
+
+/* Login input and button text color */
+div.stTextInput input { color:#ffffff; background-color:#0b1220; border:1px solid #4fd1c5; }
+div.stButton>button { color:#ffffff; background-color:#4fd1c5; font-weight:600; }
+
+/* Module cards */
 .module-card {
     background: rgba(17,27,51,0.75);
-    padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
     border: 1px solid rgba(255,255,255,0.06);
-    backdrop-filter: blur(10px);
 }
-
-/* Announcements text white */
-.stInfo p, .announcement-text {
-    color: #ffffff !important;
-    font-weight: 500;
-}
-
-/* Hero section text styling */
-.hero-text h1, .hero-text p { color: #ffffff; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -76,9 +87,9 @@ if st.session_state.authenticated:
 
     # Hero Section
     st.markdown("""
-    <div class="hero-text" style="text-align:center;padding:50px 20px">
-        <h1 style="font-size:48px;font-weight:700">Strategic Investment Banking Solutions</h1>
-        <p style="max-width:800px;margin:auto;font-size:18px">
+    <div style="text-align:center; padding:50px 20px">
+        <h1 style="font-size:48px; color:#4fd1c5; font-weight:700;">Strategic Investment Banking Solutions</h1>
+        <p style="max-width:800px; margin:auto; color:#cbd5e1; font-size:18px;">
         Access your modules, videos, and activities for each course. Explore resources designed for professional growth in finance.
         </p>
     </div>
@@ -87,7 +98,7 @@ if st.session_state.authenticated:
     # Announcements
     st.subheader("📢 Announcements")
     st.markdown("""
-    <div class="announcement-text">
+    <div class="announcement">
     <ul>
         <li>Course will begin next week.</li>
         <li>Modules and resources will be updated regularly.</li>
@@ -106,16 +117,10 @@ if st.session_state.authenticated:
         st.header("Investment Banking Modules")
         ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
         for pdf in ib_pdfs:
-            st.markdown('<div class="module-card">', unsafe_allow_html=True)
             if os.path.exists(pdf):
-                # White download text link
-                st.markdown(
-                    f'<a href="{pdf}" download style="color:white;text-decoration:none;font-weight:600;">{pdf}</a>',
-                    unsafe_allow_html=True
-                )
+                st.markdown(f'<a class="pdf-btn" href="file://{os.path.abspath(pdf)}" download="{pdf}">{pdf}</a>', unsafe_allow_html=True)
             else:
                 st.warning(f"{pdf} not found.")
-            st.markdown('</div>', unsafe_allow_html=True)
 
         st.header("Videos")
         st.markdown('<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
