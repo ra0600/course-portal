@@ -14,15 +14,14 @@ st.markdown(
     f"""
     <style>
     .stApp {{
-background_url = "PASTE_NEW_IMAGE_URL_HERE"
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
         background-image: url("{background_url}");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+    }}
+    .stButton>button {{
+        color: white;
+        background-color: #003366;
     }}
     </style>
     """,
@@ -76,19 +75,18 @@ if st.session_state.authenticated:
         st.write("Video links for Investment Banking will be added here.")
         st.header("Activities")
         st.write("Activities for Investment Banking will be added here.")
-    
+
     # ---- Financial Services ----
     with tab2:
         st.header("Financial Services Modules")
         st.write("Modules and resources will be added soon.")
-    
+
     # ---- Business Ethics ----
     with tab3:
         st.header("Business Ethics Modules")
         st.write("Modules and resources will be added soon.")
-    
+
     # ---- Business Strategy ----
     with tab4:
         st.header("Business Strategy Modules")
         st.write("Modules and resources will be added soon.")
-
