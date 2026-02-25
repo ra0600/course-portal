@@ -134,17 +134,14 @@ if st.session_state.authenticated:
         for pdf in ib_pdfs:
             st.markdown('<div class="module-card">', unsafe_allow_html=True)
             if os.path.exists(pdf):
-                with open(pdf, "rb") as f:
-                    st.download_button(
-                        label=pdf,
-                        data=f,
-                        file_name=pdf,
-                        mime="application/pdf",
-                        key=pdf
-                    )
+                # Use HTML download link instead of st.download_button
+                pdf_bytes = open(pdf, "rb").read()
+                b64 = st.experimental_get_query_params()  # dummy, not used, can ignore
+                href = f'<a href="data:application/pdf;base64,{pdf_bytes.encode("base64").decode()}" download="{pdf}" style="color:white;text-decoration:underline;">{pdf}</a>'
+                st.markdown(href, unsafe_allow_html=True)
             else:
                 st.warning(f"{pdf} not found.")
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)True)
 
         st.header("Videos")
         st.markdown('<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
@@ -166,3 +163,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
