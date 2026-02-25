@@ -8,20 +8,34 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- BACKGROUND IMAGE ----
-background_url = "https://images.pexels.com/photos/6696158/pexels-photo-6696158.jpeg"  # professional finance image
+# ---- BACKGROUND IMAGE (light finance/stock theme) ----
+background_url = "https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg"
 st.markdown(
     f"""
     <style>
+    /* Background image and overlay */
     .stApp {{
         background-image: url("{background_url}");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        position: relative;
     }}
+    .stApp::before {{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0.4);  /* semi-transparent overlay */
+        z-index: 0;
+    }}
+    /* Buttons styling */
     .stButton>button {{
         color: white;
         background-color: #003366;
+        font-weight: bold;
     }}
     </style>
     """,
@@ -33,7 +47,6 @@ PASSWORD = "bbafs23"
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
-# Show login only if not authenticated
 if not st.session_state.authenticated:
     st.title("IBFS Course Portal Login")
     password_input = st.text_input("Enter Access Code", type="password")
@@ -45,10 +58,18 @@ if not st.session_state.authenticated:
 
 # ---- PORTAL CONTENT ----
 if st.session_state.authenticated:
+    # Header
     st.title("Semester-IV IBFS Course Portal")
-    st.write("Welcome! Access your modules, videos, and resources for each course below.")
+    
+    # Announcement Panel
+    st.subheader("📢 Announcements")
+    st.info("""
+    - Course will begin next week.  
+    - Modules and resources will be updated regularly.  
+    - Check back here for latest news and updates.  
+    """)
 
-    # Create tabs for 4 courses
+    # Tabs for 4 courses
     tab1, tab2, tab3, tab4 = st.tabs([
         "Investment Banking",
         "Financial Services",
@@ -90,4 +111,3 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.write("Modules and resources will be added soon.")
-
