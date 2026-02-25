@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ---- PASSWORD PROTECTION ----
-PASSWORD = "bbafs"  # Change as you like
+PASSWORD = "bbafs23"  # Change as you like
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -38,3 +38,4 @@ if st.session_state.authenticated:
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
     # ----- END YOUR PORTAL CONTENT -----
+
