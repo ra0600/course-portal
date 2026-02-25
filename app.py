@@ -141,7 +141,7 @@ if st.session_state.authenticated:
                 st.markdown(href, unsafe_allow_html=True)
             else:
                 st.warning(f"{pdf} not found.")
-            st.markdown('</div>', unsafe_allow_html=True)True)
+            st.markdown('</div>', unsafe_allow_html=True)
 
         st.header("Videos")
         st.markdown('<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
@@ -163,4 +163,5 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
