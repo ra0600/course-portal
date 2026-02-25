@@ -14,14 +14,15 @@ st.markdown(
     f"""
     <style>
     .stApp {{
+background_url = "PASTE_NEW_IMAGE_URL_HERE"
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
         background-image: url("{background_url}");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-    }}
-    .stButton>button {{
-        color: white;
-        background-color: #003366;
     }}
     </style>
     """,
@@ -90,3 +91,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.write("Modules and resources will be added soon.")
+
