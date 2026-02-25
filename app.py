@@ -52,7 +52,7 @@ st.markdown("""
 
 /* Module card styling */
 .module-card {
-    background: rgba(17,27,51,0.75);
+    background: rgba(14,165,233,0.25);
     padding: 20px;
     border-radius: 18px;
     margin-bottom: 20px;
@@ -152,4 +152,5 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
