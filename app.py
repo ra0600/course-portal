@@ -88,7 +88,7 @@ if st.session_state.authenticated:
     # Hero Section
     st.markdown("""
     <div style="text-align:center; padding:50px 20px">
-        <h1 style="font-size:48px; color:#4fd1c5; font-weight:700;">Strategic Investment Banking Solutions</h1>
+        <h1 style="font-size:48px; color:#4fd1c5; font-weight:700;">Investment Banking Solutions</h1>
         <p style="max-width:800px; margin:auto; color:#cbd5e1; font-size:18px;">
         Access your modules, videos, and activities for each course. Explore resources designed for professional growth in finance.
         </p>
@@ -142,3 +142,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
