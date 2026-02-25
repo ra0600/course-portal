@@ -8,13 +8,11 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- CSS for dark background and text download links ----
+# ---- CSS for dark card + black download text ----
 st.markdown("""
 <style>
-.stApp {
-    background-color: #0b1220;  /* dark background */
-    color: #ffffff;
-}
+.stApp { background-color: #0b1220; color: #ffffff; }
+
 .module-card {
     background: rgba(17,27,51,0.75);
     padding: 20px;
@@ -24,16 +22,17 @@ st.markdown("""
     backdrop-filter: blur(10px);
 }
 
-/* Make download button appear as black text link */
-.download-btn button {
-    all: unset;                 /* remove default button styles */
-    color: #000000;             /* black text */
+/* Make download button look like plain black text */
+.stButton>button {
+    all: unset;               /* remove default styling */
+    color: #000000;           /* black text */
     cursor: pointer;
     font-weight: 600;
+    font-size: 16px;
 }
-.download-btn button:hover {
-    color: #4fd1c5;             /* hover color */
-    text-decoration: underline; /* underline on hover */
+.stButton>button:hover {
+    color: #4fd1c5;           /* hover color */
+    text-decoration: underline;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -60,7 +59,7 @@ if st.session_state.authenticated:
         st.markdown('<div class="module-card">', unsafe_allow_html=True)
         if os.path.exists(pdf):
             with open(pdf, "rb") as f:
-                st.markdown(f'<div class="download-btn">{st.download_button(label=pdf, data=f, file_name=pdf, mime="application/pdf")}</div>', unsafe_allow_html=True)
+                st.download_button(label=pdf, data=f, file_name=pdf, mime="application/pdf")
         else:
             st.warning(f"{pdf} not found.")
         st.markdown('</div>', unsafe_allow_html=True)
