@@ -32,10 +32,26 @@ if st.session_state.authenticated:
     st.write("Course will begin next week.")
 
     st.header("Module Section")
-    st.write("Module materials will be uploaded soon.")
+    import os
+
+# Path to your PDF files
+pdf_files = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
+
+for pdf in pdf_files:
+    if os.path.exists(pdf):
+        with open(pdf, "rb") as f:
+            st.download_button(
+                label=f"Download {pdf}",
+                data=f,
+                file_name=pdf,
+                mime="application/pdf"
+            )
+    else:
+        st.write(f"{pdf} not found.")
 
     st.header("Video Section")
     st.write("Video links will be added soon.")
 
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
+
