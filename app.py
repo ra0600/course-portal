@@ -129,19 +129,19 @@ if st.session_state.authenticated:
 
     # ---- Investment Banking Tab ----
     with tab1:
-        st.header("Investment Banking Modules")
-        ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
-        for pdf in ib_pdfs:
-            st.markdown('<div class="module-card">', unsafe_allow_html=True)
-            if os.path.exists(pdf):
-                # Use HTML download link instead of st.download_button
-                pdf_bytes = open(pdf, "rb").read()
-                b64 = st.experimental_get_query_params()  # dummy, not used, can ignore
-                href = f'<a href="data:application/pdf;base64,{pdf_bytes.encode("base64").decode()}" download="{pdf}" style="color:white;text-decoration:underline;">{pdf}</a>'
-                st.markdown(href, unsafe_allow_html=True)
-            else:
-                st.warning(f"{pdf} not found.")
-            st.markdown('</div>', unsafe_allow_html=True)
+    st.header("Investment Banking Modules")
+    ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
+    for pdf in ib_pdfs:
+        st.markdown('<div class="module-card">', unsafe_allow_html=True)
+        if os.path.exists(pdf):
+            # Plain white text link for download
+            st.markdown(
+                f'<a href="{pdf}" download style="color:white;text-decoration:none;font-weight:600;">{pdf}</a>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.warning(f"{pdf} not found.")
+        st.markdown('</div>', unsafe_allow_html=True)
 
         st.header("Videos")
         st.markdown('<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
@@ -163,5 +163,6 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
 
