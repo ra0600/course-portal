@@ -25,18 +25,29 @@ st.markdown(f"""
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.6);  /* dark overlay for readability */
+        background-color: rgba(0,0,0,0.8);  /* darker overlay */
         z-index: -1;
     }}
     .stButton>button {{
         color: white;
-        background-color: #4fd1c5;
+        background-color: #0ea5e9;
         font-weight: bold;
         border-radius: 30px;
         padding: 12px 25px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }}
+    .stButton>button:hover {{
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(14,165,233,0.4);
     }}
     .stText, .stMarkdown {{
         color: #fff;
+    }}
+    .module-card {{
+        background-color: rgba(20,30,50,0.7);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 20px;
     }}
     </style>
 """, unsafe_allow_html=True)
@@ -47,7 +58,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.title("Elite Capital – IBFS Course Portal Login")
+    st.title("IBFS Course Portal Login")
     password_input = st.text_input("Enter Access Code", type="password")
     if st.button("Enter Portal"):
         if password_input == PASSWORD:
@@ -83,31 +94,34 @@ if st.session_state.authenticated:
     # ---- Investment Banking Tab ----
     with tab1:
         st.header("Investment Banking Modules")
-        cols = st.columns(2)
         ib_pdfs = ["Module1.pdf", "Module2.pdf", "Module3.pdf", "Module4.pdf", "Module5.pdf"]
-        for i, pdf in enumerate(ib_pdfs):
-            with cols[i % 2]:
+        for pdf in ib_pdfs:
+            with st.container():
+                st.markdown(f'<div class="module-card">', unsafe_allow_html=True)
                 if os.path.exists(pdf):
                     with open(pdf, "rb") as f:
                         st.download_button(label=f"Download {pdf}", data=f, file_name=pdf, mime="application/pdf")
                 else:
                     st.warning(f"{pdf} not found.")
+                st.markdown('</div>', unsafe_allow_html=True)
+
         st.header("Videos")
-        st.write("Video links for Investment Banking will be added here.")
+        st.markdown(f'<div class="module-card">Video links for Investment Banking will be added here.</div>', unsafe_allow_html=True)
+
         st.header("Activities")
-        st.write("Activities for Investment Banking will be added here.")
+        st.markdown(f'<div class="module-card">Activities for Investment Banking will be added here.</div>', unsafe_allow_html=True)
 
     # ---- Financial Services Tab ----
     with tab2:
         st.header("Financial Services Modules")
-        st.write("Modules and resources will be added soon.")
+        st.markdown(f'<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
 
     # ---- Business Ethics Tab ----
     with tab3:
         st.header("Business Ethics Modules")
-        st.write("Modules and resources will be added soon.")
+        st.markdown(f'<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
 
     # ---- Business Strategy Tab ----
     with tab4:
         st.header("Business Strategy Modules")
-        st.write("Modules and resources will be added soon.")
+        st.markdown(f'<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
