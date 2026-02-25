@@ -5,24 +5,25 @@ st.set_page_config(page_title="My Course Portal")
 # ---- PASSWORD PROTECTION ----
 PASSWORD = "bbafs23"
 
-# Initialize session variables
+# Initialize session state
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
+if "login_attempted" not in st.session_state:
+    st.session_state.login_attempted = False
 
-# Show login only if not authenticated
+# LOGIN PAGE
 if not st.session_state.authenticated:
     st.title("Course Portal Login")
     password = st.text_input("Enter Access Code", type="password")
-    login_clicked = st.button("Login")
     
-    if login_clicked:
+    if st.button("Login"):
+        st.session_state.login_attempted = True
         if password == PASSWORD:
             st.session_state.authenticated = True
-            st.experimental_rerun()  # reload the page after success
         else:
             st.error("Incorrect Access Code")
 
-# Show portal only if authenticated
+# PORTAL PAGE
 if st.session_state.authenticated:
     st.title("Welcome to My Course Portal")
     st.write("This portal will contain modules, videos, activities and resources.")
