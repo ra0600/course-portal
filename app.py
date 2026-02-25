@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 
-st.set_page_config(page_title="My Course Portal")
+st.set_page_config(page_title="Investment Banking & Financial Services")
 
 # ---- PASSWORD PROTECTION ----
 PASSWORD = "bbafs23"
@@ -49,3 +49,4 @@ if st.session_state.authenticated:
 
     st.header("Activity Section")
     st.write("Activity details will be updated soon.")
+
