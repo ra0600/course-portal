@@ -47,17 +47,16 @@ st.markdown("""
 
 /* Download buttons as text links */
 .stButton>button {
-    color: #ffffff !important;      /* white text */
+    color: #000000 !important;      /* black text */
     background-color: transparent !important;  /* remove button fill */
     border: none !important;        /* remove border */
     padding: 0 !important;          /* remove padding */
     font-weight: 600;               /* bold text */
-    text-decoration: underline;     /* underline like a link */
+    text-decoration: none;          /* no underline */
     cursor: pointer;
 }
 .stButton>button:hover {
     color: #4fd1c5 !important;      /* hover color */
-    text-decoration: none;
 }
 
 /* Announcements styling */
@@ -157,3 +156,4 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
