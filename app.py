@@ -100,7 +100,7 @@ if st.session_state.authenticated:
     st.markdown("""
     <div class="announcement">
     <ul>
-        <li>Course will begin next week.</li>
+        <li>Course materials and videos are available here.</li>
         <li>Modules and resources will be updated regularly.</li>
         <li>Check back here for latest news and updates.</li>
     </ul>
@@ -142,4 +142,5 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown('<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
