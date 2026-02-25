@@ -8,23 +8,23 @@ PASSWORD = "bbafs23"
 # Initialize session state
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
-if "login_attempted" not in st.session_state:
-    st.session_state.login_attempted = False
 
-# LOGIN PAGE
+# Only show login if NOT authenticated
 if not st.session_state.authenticated:
     st.title("Course Portal Login")
-    password = st.text_input("Enter Access Code", type="password")
+    password_input = st.text_input("Enter Access Code", type="password")
+    login_clicked = st.button("Login")
     
-    if st.button("Login"):
-        st.session_state.login_attempted = True
-        if password == PASSWORD:
+    if login_clicked:
+        if password_input == PASSWORD:
             st.session_state.authenticated = True
         else:
             st.error("Incorrect Access Code")
 
-# PORTAL PAGE
+# Show portal content ONLY if authenticated
 if st.session_state.authenticated:
+    # HIDE login field completely by using container
+    st.empty()  # this removes the login input visually
     st.title("Welcome to My Course Portal")
     st.write("This portal will contain modules, videos, activities and resources.")
 
