@@ -8,15 +8,18 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---- DARK BLUE STYLING WITH GRADIENT AND FLOATING SHAPES ----
+# ---- DARK BLUE BACKGROUND WITH FLOATING SHAPES ----
 st.markdown("""
 <style>
+/* Main background with radial gradients and dark blue */
 .stApp {
     background: radial-gradient(circle at 20% 20%, rgba(79,209,197,0.15), transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(14,165,233,0.15), transparent 40%),
                 linear-gradient(135deg,#060b17,#0b1220,#060b17);
-    color: #fff;
+    color: #ffffff;
 }
+
+/* Floating animated shapes */
 .stApp::before, .stApp::after {
     content: "";
     position: fixed;
@@ -29,13 +32,15 @@ st.markdown("""
 }
 .stApp::before { background: rgba(79,209,197,0.25); top:-120px; left:-120px; }
 .stApp::after { background: rgba(14,165,233,0.25); bottom:-150px; right:-150px; animation-delay:6s; }
+
 @keyframes float { from{transform:translateY(0px) translateX(0px)} to{transform:translateY(60px) translateX(40px)} }
 
+/* Buttons for download - black text, white background */
 .stButton>button {
-    color: white;
-    background: linear-gradient(135deg,#4fd1c5,#0ea5e9);
-    font-weight: 600;
+    color: #000000 !important;
+    background: #ffffff !important;
     border-radius: 30px;
+    font-weight: 600;
     padding: 12px 25px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -43,6 +48,8 @@ st.markdown("""
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(79,209,197,0.4);
 }
+
+/* Module card styling */
 .module-card {
     background: rgba(17,27,51,0.75);
     padding: 20px;
@@ -50,6 +57,18 @@ st.markdown("""
     margin-bottom: 20px;
     border: 1px solid rgba(255,255,255,0.06);
     backdrop-filter: blur(10px);
+    color: #fff;
+}
+
+/* Announcements info box - white text */
+.stInfo p {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+/* Hero section text styling */
+.hero-text h1, .hero-text p {
+    color: #ffffff;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -70,9 +89,10 @@ if not st.session_state.authenticated:
 
 # ---- PORTAL CONTENT ----
 if st.session_state.authenticated:
+
     # Hero Section
     st.markdown("""
-    <div style="text-align:center;padding:50px 20px">
+    <div class="hero-text" style="text-align:center;padding:50px 20px">
         <h1 style="font-size:48px;color:#4fd1c5;font-weight:700">Strategic Investment Banking Solutions</h1>
         <p style="max-width:800px;margin:auto;color:#cbd5e1;font-size:18px">
         Access your modules, videos, and activities for each course. Explore resources designed for professional growth in finance.
