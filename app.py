@@ -13,7 +13,7 @@ background_url = "https://www.dreamstime.com/chic-dual-color-background-seamless
 st.markdown(f"""
     <style>
     .stApp {{
-        background-image: url("{background_url}");
+        background-image: url("{https://www.dreamstime.com/chic-dual-color-background-seamless-blend-dark-navy-rich-royal-blue-perfect-sophisticated-elegant-aesthetic-image327881619}");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -125,4 +125,5 @@ if st.session_state.authenticated:
     with tab4:
         st.header("Business Strategy Modules")
         st.markdown(f'<div class="module-card">Modules and resources will be added soon.</div>', unsafe_allow_html=True)
+
 
