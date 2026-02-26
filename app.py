@@ -2,6 +2,45 @@ import streamlit as st
 import os
 
 st.set_page_config(page_title="Investment Banking & Financial Services Course Portal", layout="wide")
+
+# -----------------------------
+# PASSWORD SETTINGS
+# -----------------------------
+PASSWORD = "bbafs23"   # ← Change this to your preferred password
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+def login():
+    st.markdown("<h2 style='text-align:center;'>Course Portal Login</h2>", unsafe_allow_html=True)
+    password_input = st.text_input("Enter Password", type="password")
+
+    if st.button("Login"):
+        if password_input == PASSWORD:
+            st.session_state.authenticated = True
+            st.success("Login successful")
+            st.rerun()
+        else:
+            st.error("Incorrect password")
+
+# -----------------------------
+# LOGIN CHECK
+# -----------------------------
+if not st.session_state.authenticated:
+    login()
+    st.stop()
+
+# -----------------------------
+# LOGOUT BUTTON
+# -----------------------------
+with st.sidebar:
+    if st.button("Logout"):
+        st.session_state.authenticated = False
+        st.rerun()
+
+# -----------------------------
+# MAIN PORTAL
+# -----------------------------
 st.markdown(
     "<h1 style='text-align: center; color:#0A3D62;'>Investment Banking & Financial Services Course Portal</h1>",
     unsafe_allow_html=True
@@ -85,7 +124,7 @@ elif menu == "Video Lectures":
     st.video("https://youtu.be/Ktnr6fXrurc")
 
     st.subheader("Factoring vs Forfaiting")
-    st.video("https://www.youtube.com/watch?v=tppLiwVukis")
+    st.video("https://youtu.be/tppLiwVukis")
 
     st.subheader("Role of Investment Banking")
     st.video("https://youtu.be/qCgojEvwcOk")
@@ -101,6 +140,7 @@ elif menu == "Video Lectures":
     
     st.subheader("Alternative Investments")
     st.video("https://youtu.be/MMMd3sNq5VY")
+
 # -----------------------------
 # Activities & References
 # -----------------------------
@@ -131,11 +171,3 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
-
-
-
-
-
-
-
-
