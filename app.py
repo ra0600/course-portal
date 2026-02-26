@@ -173,3 +173,101 @@ elif menu == "Activities & References":
         st.info("Reference book not uploaded yet.")
 
 
+# -----------------------------
+# Quiz Section
+# -----------------------------
+elif menu == "Quiz":
+    st.header("IBFS Course Quiz")
+    st.write("Answer the following 10 questions:")
+
+    score = 0
+
+    # Question 1
+    q1 = st.radio(
+        "1. Which institution regulates banks in India?",
+        ["SEBI", "RBI", "IRDAI", "NABARD"]
+    )
+    if q1 == "RBI":
+        score += 1
+
+    # Question 2
+    q2 = st.radio(
+        "2. IPO stands for:",
+        ["Initial Public Offer", "Indian Public Offering", "Internal Public Option", "Investment Portfolio Order"]
+    )
+    if q2 == "Initial Public Offer":
+        score += 1
+
+    # Question 3
+    q3 = st.radio(
+        "3. Leasing is primarily a form of:",
+        ["Equity financing", "Debt financing", "Asset financing", "Insurance"]
+    )
+    if q3 == "Asset financing":
+        score += 1
+
+    # Question 4
+    q4 = st.radio(
+        "4. Factoring is related to:",
+        ["Equity shares", "Accounts receivable", "Real estate", "Mutual funds"]
+    )
+    if q4 == "Accounts receivable":
+        score += 1
+
+    # Question 5
+    q5 = st.radio(
+        "5. Mortgage loan is secured against:",
+        ["Machinery", "Inventory", "Property", "Gold"]
+    )
+    if q5 == "Property":
+        score += 1
+
+    # Question 6
+    q6 = st.radio(
+        "6. SEBI regulates:",
+        ["Insurance sector", "Capital markets", "Banking loans", "Microfinance"]
+    )
+    if q6 == "Capital markets":
+        score += 1
+
+    # Question 7
+    q7 = st.radio(
+        "7. Alternative investments include:",
+        ["Savings account", "Fixed deposits", "Hedge funds", "Recurring deposits"]
+    )
+    if q7 == "Hedge funds":
+        score += 1
+
+    # Question 8
+    q8 = st.radio(
+        "8. Housing finance mainly supports:",
+        ["Vehicle loans", "Education loans", "Home purchase", "Gold trading"]
+    )
+    if q8 == "Home purchase":
+        score += 1
+
+    # Question 9
+    q9 = st.radio(
+        "9. Hire purchase transfers ownership:",
+        ["Immediately", "After full payment", "Before payment", "Never"]
+    )
+    if q9 == "After full payment":
+        score += 1
+
+    # Question 10
+    q10 = st.radio(
+        "10. Investment banks primarily deal with:",
+        ["Retail savings", "Government pensions", "Corporate finance and securities", "Agricultural loans"]
+    )
+    if q10 == "Corporate finance and securities":
+        score += 1
+
+    if st.button("Submit Quiz"):
+        st.subheader(f"Your Score: {score}/10")
+
+        if score >= 8:
+            st.success("Excellent performance!")
+        elif score >= 5:
+            st.info("Good effort. Review some topics.")
+        else:
+            st.warning("Please revise the modules and try again.")
