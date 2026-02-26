@@ -106,25 +106,26 @@ elif menu == "Activities & References":
     st.write("Analyse the structure of housing finance institutions in your country.")
 
     st.write("### Activity 2")
-    st.write("Compare fixed vs floating mortgage rates with real examples.")
+    st.write("Compare fixed and floating mortgage rate systems.")
 
     st.write("### Activity 3")
-    st.write("Design a low income housing finance model.")
+    st.write("Develop a sustainable affordable housing finance model.")
 
     st.divider()
 
-    st.header("Reference Books")
+    st.header("Reference Book")
 
-    reference_book_path = "books/reference_book1.pdf"
+    book_path = "books/housing_finance_reference.pdf"
 
-    if os.path.exists(reference_book_path):
-        with open(reference_book_path, "rb") as f:
+    if os.path.exists(book_path):
+        with open(book_path, "rb") as f:
             st.download_button(
-                "Download Reference Book",
+                "Download Housing Finance Reference Book",
                 f,
-                "reference_book1.pdf"
+                "housing_finance_reference.pdf"
             )
     else:
-        st.info("Upload reference book inside books folder to enable download.")
+        st.info("Reference book not uploaded yet.")
+
 
 
