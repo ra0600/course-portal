@@ -12,7 +12,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 def login():
-    st.markdown("<h2 style='text-align:center;'>Course Portal Login</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align:center;'>IBFS Course Portal Login</h2>", unsafe_allow_html=True)
     password_input = st.text_input("Enter Password", type="password")
 
     if st.button("Login"):
@@ -171,3 +171,4 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
+
