@@ -3,9 +3,9 @@ import os
 
 st.set_page_config(page_title="Housing Finance Course Portal", layout="wide")
 
-st.title("Housing Finance – Course Portal")
+st.title("Investment Banking & Financial Services – Course Portal")
 
-st.markdown("Welcome to the Housing Finance academic portal. Access modules, videos, case studies, and learning activities below.")
+st.markdown("Welcome to the IBFS academic portal. Access modules, videos, case studies, and learning activities below.")
 
 # Sidebar Navigation
 menu = st.sidebar.selectbox(
@@ -126,6 +126,7 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
+
 
 
 
