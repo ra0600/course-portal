@@ -177,101 +177,103 @@ elif menu == "Activities & References":
 # Quiz Section
 # -----------------------------
 elif menu == "Quiz":
-    st.header("Course Quizzes")
+    st.header("Course Assessment")
 
     quiz_option = st.selectbox(
         "Select Quiz",
-        ["Quiz 1 – Indian Financial System",
-         "Quiz 2 – Housing Finance",
-         "Quiz 3 – Investment Banking"]
+        ["Quiz 1 – Indian Financial System"]
     )
 
-    # -----------------------------
-    # QUIZ 1
-    # -----------------------------
     if quiz_option == "Quiz 1 – Indian Financial System":
-        st.subheader("Quiz 1")
 
-        score = 0
+        st.subheader("Student Details")
 
-        q1 = st.radio("1. RBI is the:", 
-                      ["Central Bank", "Commercial Bank", "Insurance Company", "Stock Exchange"],
-                      key="q1")
-        if q1 == "Central Bank":
-            score += 1
+        student_name = st.text_input("Enter Your Full Name")
+        student_id = st.text_input("Enter Student ID")
 
-        q2 = st.radio("2. SEBI regulates:", 
-                      ["Bank loans", "Capital markets", "Insurance", "Microfinance"],
-                      key="q2")
-        if q2 == "Capital markets":
-            score += 1
+        if "quiz_submitted" not in st.session_state:
+            st.session_state.quiz_submitted = False
 
-        q3 = st.radio("3. NABARD supports:", 
-                      ["Agriculture finance", "Stock trading", "IPO listing", "Urban housing"],
-                      key="q3")
-        if q3 == "Agriculture finance":
-            score += 1
+        if not st.session_state.quiz_submitted:
 
-        if st.button("Submit Quiz 1"):
-            st.success(f"Your Score: {score}/3")
+            st.subheader("Answer All Questions")
 
-    # -----------------------------
-    # QUIZ 2
-    # -----------------------------
-    elif quiz_option == "Quiz 2 – Housing Finance":
-        st.subheader("Quiz 2")
+            answers = {}
 
-        score = 0
+            answers["q1"] = st.radio(
+                "1. RBI is the:",
+                ["Central Bank", "Commercial Bank", "Insurance Company", "Stock Exchange"]
+            )
 
-        q1 = st.radio("1. Mortgage loan is secured against:", 
-                      ["Gold", "Inventory", "Property", "Shares"],
-                      key="q4")
-        if q1 == "Property":
-            score += 1
+            answers["q2"] = st.radio(
+                "2. SEBI regulates:",
+                ["Bank loans", "Capital markets", "Insurance", "Microfinance"]
+            )
 
-        q2 = st.radio("2. Floating rate loans change with:", 
-                      ["Inflation", "Market interest rate", "Tax rate", "GDP"],
-                      key="q5")
-        if q2 == "Market interest rate":
-            score += 1
+            answers["q3"] = st.radio(
+                "3. NABARD supports:",
+                ["Agriculture finance", "Stock trading", "IPO listing", "Urban housing"]
+            )
 
-        q3 = st.radio("3. Housing finance mainly supports:", 
-                      ["Vehicle purchase", "Home purchase", "IPO investment", "Export trade"],
-                      key="q6")
-        if q3 == "Home purchase":
-            score += 1
+            correct_answers = {
+                "q1": "Central Bank",
+                "q2": "Capital markets",
+                "q3": "Agriculture finance"
+            }
 
-        if st.button("Submit Quiz 2"):
-            st.success(f"Your Score: {score}/3")
+            if st.button("Submit Quiz"):
 
-    # -----------------------------
-    # QUIZ 3
-    # -----------------------------
-    elif quiz_option == "Quiz 3 – Investment Banking":
-        st.subheader("Quiz 3")
+                if student_name == "" or student_id == "":
+                    st.warning("Please enter student details before submitting.")
+                else:
+                    score = 0
+                    for key in correct_answers:
+                        if answers[key] == correct_answers[key]:
+                            score += 1
 
-        score = 0
+                    st.session_state.quiz_submitted = True
+                    st.session_state.score = score
+                    st.session_state.answers = answers
+                    st.session_state.correct_answers = correct_answers
+                    st.session_state.student_name = student_name
+                    st.session_state.student_id = student_id
 
-        q1 = st.radio("1. IPO stands for:", 
-                      ["Initial Public Offer", "Internal Public Option", "Indian Portfolio Order", "Investment Public Office"],
-                      key="q7")
-        if q1 == "Initial Public Offer":
-            score += 1
+                    st.rerun()
 
-        q2 = st.radio("2. Investment banks mainly deal with:", 
-                      ["Retail deposits", "Corporate finance", "Agricultural loans", "Savings accounts"],
-                      key="q8")
-        if q2 == "Corporate finance":
-            score += 1
+        else:
+            st.success("Quiz Submitted Successfully")
 
-        q3 = st.radio("3. Alternative investments include:", 
-                      ["Fixed deposits", "Savings account", "Hedge funds", "Recurring deposits"],
-                      key="q9")
-        if q3 == "Hedge funds":
-            score += 1
+            score = st.session_state.score
+            total = len(st.session_state.correct_answers)
 
-        if st.button("Submit Quiz 3"):
-            st.success(f"Your Score: {score}/3")
+            st.subheader(f"Final Score: {score} / {total}")
+
+            st.write("### Correct Answers Review")
+
+            for key in st.session_state.correct_answers:
+                st.write(f"{key.upper()} Correct Answer: {st.session_state.correct_answers[key]}")
+                st.write(f"Your Answer: {st.session_state.answers[key]}")
+                st.write("---")
+
+            result_text = f"""
+            Investment Banking & Financial Services Course
+            ----------------------------------------------
+            Student Name: {st.session_state.student_name}
+            Student ID: {st.session_state.student_id}
+
+            Final Score: {score} / {total}
+            """
+
+            st.download_button(
+                "Download Result Slip",
+                result_text,
+                file_name="quiz_result.txt"
+            )
+
+            if st.button("Reset Quiz"):
+                st.session_state.quiz_submitted = False
+                st.rerun()
+
 
 
 
