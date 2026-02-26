@@ -7,8 +7,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Investment Banking & Financial Services – Course Portal")
-
 st.markdown("Welcome to the IBFS academic portal. Access modules, videos, case studies, and learning activities below.")
 
 # Sidebar Navigation
@@ -130,6 +128,7 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
+
 
 
 
