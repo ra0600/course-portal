@@ -293,21 +293,49 @@ elif menu == "Assessment":
         run_quiz("quiz3",questions,correct)
 
 # =============================
-# ADMIN ANALYTICS
+# ADMIN ANALYTICS (PROTECTED)
 # =============================
 elif menu == "Admin Analytics":
-    st.header("Admin Dashboard")
-    visit_df=pd.read_csv(VISIT_FILE)
-    result_df=pd.read_csv(RESULT_FILE)
 
-    st.write(f"Total App Opens: {len(visit_df)}")
-    st.write(f"Total Quiz Attempts: {len(result_df)}")
+    # Initialize admin session state
+    if "admin_authenticated" not in st.session_state:
+        st.session_state.admin_authenticated = False
 
-    if not result_df.empty:
-        st.subheader("Attempts by Quiz")
-        st.dataframe(result_df["quiz"].value_counts())
-        st.subheader("All Results")
-        st.dataframe(result_df)
+    if not st.session_state.admin_authenticated:
+        st.subheader("Admin Login Required")
+        admin_pwd = st.text_input("Enter Admin Password", type="password")
+
+        if st.button("Login as Admin"):
+            if admin_pwd == ADMIN_PASSWORD:
+                st.session_state.admin_authenticated = True
+                st.success("Admin Access Granted")
+                st.rerun()
+            else:
+                st.error("Incorrect Admin Password")
+
+    else:
+        st.header("Admin Dashboard")
+
+        visit_df = pd.read_csv(VISIT_FILE)
+        result_df = pd.read_csv(RESULT_FILE)
+
+        st.write(f"Total App Opens: {len(visit_df)}")
+        st.write(f"Total Quiz Attempts: {len(result_df)}")
+
+        if not result_df.empty:
+            st.subheader("Attempts by Quiz")
+            st.dataframe(result_df["quiz"].value_counts())
+
+            st.subheader("Average Score by Quiz")
+            st.dataframe(result_df.groupby("quiz")["score"].mean())
+
+            st.subheader("All Student Results")
+            st.dataframe(result_df)
+
+        if st.button("Logout Admin"):
+            st.session_state.admin_authenticated = False
+            st.rerun()
+
 
 
 
