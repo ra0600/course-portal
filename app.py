@@ -30,7 +30,6 @@ visit_df.to_csv(VISIT_FILE, index=False)
 # PASSWORD SETTINGS
 # =============================
 PASSWORD = "bbafs23"
-ADMIN_PASSWORD = "ibfs23"
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -336,6 +335,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
