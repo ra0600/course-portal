@@ -51,7 +51,7 @@ st.markdown("Welcome to the IBFS academic portal. Access modules, videos, case s
 # Sidebar Navigation
 menu = st.sidebar.selectbox(
     "Select Section",
-    ["Course Overview", "Modules", "Case Study", "Video Lectures", "Activities & References", "Quiz"]
+    ["Course Overview", "Modules", "Case Study", "Video Lectures", "Activities & References", "Assessment"]
 )
 
 # -----------------------------
@@ -174,52 +174,46 @@ elif menu == "Activities & References":
 
 
 # -----------------------------
-# Quiz Section
+# Assessment Section
 # -----------------------------
-elif menu == "Quiz":
+elif menu == "Assessment":
     st.header("Course Assessment")
 
     quiz_option = st.selectbox(
         "Select Quiz",
-        ["Quiz 1 – Indian Financial System"]
+        [
+            "Quiz 1 – Indian Financial System",
+            "Quiz 2 – Housing Finance",
+            "Quiz 3 – Investment Banking"
+        ]
     )
 
-    if quiz_option == "Quiz 1 – Indian Financial System":
+    # Common student details
+    student_name = st.text_input("Enter Your Full Name")
+    student_id = st.text_input("Enter Student ID")
 
-        st.subheader("Student Details")
+    # Initialize session states dynamically
+    if "quiz_data" not in st.session_state:
+        st.session_state.quiz_data = {}
 
-        student_name = st.text_input("Enter Your Full Name")
-        student_id = st.text_input("Enter Student ID")
+    # Function to run quiz
+    def run_quiz(quiz_key, questions, correct_answers):
 
-        if "quiz_submitted" not in st.session_state:
-            st.session_state.quiz_submitted = False
+        if quiz_key not in st.session_state.quiz_data:
+            st.session_state.quiz_data[quiz_key] = {
+                "submitted": False,
+                "score": 0,
+                "answers": {}
+            }
 
-        if not st.session_state.quiz_submitted:
+        quiz_state = st.session_state.quiz_data[quiz_key]
 
-            st.subheader("Answer All Questions")
+        if not quiz_state["submitted"]:
 
             answers = {}
 
-            answers["q1"] = st.radio(
-                "1. RBI is the:",
-                ["Central Bank", "Commercial Bank", "Insurance Company", "Stock Exchange"]
-            )
-
-            answers["q2"] = st.radio(
-                "2. SEBI regulates:",
-                ["Bank loans", "Capital markets", "Insurance", "Microfinance"]
-            )
-
-            answers["q3"] = st.radio(
-                "3. NABARD supports:",
-                ["Agriculture finance", "Stock trading", "IPO listing", "Urban housing"]
-            )
-
-            correct_answers = {
-                "q1": "Central Bank",
-                "q2": "Capital markets",
-                "q3": "Agriculture finance"
-            }
+            for i, (question, options) in enumerate(questions.items()):
+                answers[f"q{i+1}"] = st.radio(question, options, key=f"{quiz_key}_{i}")
 
             if st.button("Submit Quiz"):
 
@@ -231,48 +225,109 @@ elif menu == "Quiz":
                         if answers[key] == correct_answers[key]:
                             score += 1
 
-                    st.session_state.quiz_submitted = True
-                    st.session_state.score = score
-                    st.session_state.answers = answers
-                    st.session_state.correct_answers = correct_answers
-                    st.session_state.student_name = student_name
-                    st.session_state.student_id = student_id
-
+                    quiz_state["submitted"] = True
+                    quiz_state["score"] = score
+                    quiz_state["answers"] = answers
                     st.rerun()
 
         else:
-            st.success("Quiz Submitted Successfully")
+            score = quiz_state["score"]
+            total = len(correct_answers)
 
-            score = st.session_state.score
-            total = len(st.session_state.correct_answers)
+            st.success(f"Final Score: {score} / {total}")
 
-            st.subheader(f"Final Score: {score} / {total}")
+            st.write("### Answer Review")
 
-            st.write("### Correct Answers Review")
-
-            for key in st.session_state.correct_answers:
-                st.write(f"{key.upper()} Correct Answer: {st.session_state.correct_answers[key]}")
-                st.write(f"Your Answer: {st.session_state.answers[key]}")
+            for key in correct_answers:
+                st.write(f"Correct Answer: {correct_answers[key]}")
+                st.write(f"Your Answer: {quiz_state['answers'][key]}")
                 st.write("---")
 
             result_text = f"""
-            Investment Banking & Financial Services Course
-            ----------------------------------------------
-            Student Name: {st.session_state.student_name}
-            Student ID: {st.session_state.student_id}
+Investment Banking & Financial Services Course
+----------------------------------------------
+Quiz: {quiz_option}
+Student Name: {student_name}
+Student ID: {student_id}
 
-            Final Score: {score} / {total}
-            """
+Final Score: {score} / {total}
+"""
 
             st.download_button(
                 "Download Result Slip",
                 result_text,
-                file_name="quiz_result.txt"
+                file_name=f"{quiz_key}_result.txt"
             )
 
             if st.button("Reset Quiz"):
-                st.session_state.quiz_submitted = False
+                st.session_state.quiz_data[quiz_key]["submitted"] = False
                 st.rerun()
+
+    # -----------------------------
+    # QUIZ 1
+    # -----------------------------
+    if quiz_option == "Quiz 1 – Indian Financial System":
+
+        questions = {
+            "1. RBI is the:": ["Central Bank", "Commercial Bank", "Insurance Company", "Stock Exchange"],
+            "2. SEBI regulates:": ["Bank loans", "Capital markets", "Insurance", "Microfinance"],
+            "3. NABARD supports:": ["Agriculture finance", "Stock trading", "IPO listing", "Urban housing"]
+        }
+
+        correct_answers = {
+            "q1": "Central Bank",
+            "q2": "Capital markets",
+            "q3": "Agriculture finance"
+        }
+
+        run_quiz("quiz1", questions, correct_answers)
+
+    # -----------------------------
+    # QUIZ 2 – 5 QUESTIONS
+    # -----------------------------
+    elif quiz_option == "Quiz 2 – Housing Finance":
+
+        questions = {
+            "1. Mortgage loan is secured against:": ["Gold", "Inventory", "Property", "Shares"],
+            "2. Floating rate loans vary with:": ["GDP", "Market interest rate", "Tax rate", "Inflation"],
+            "3. EMI stands for:": ["Equated Monthly Installment", "Equal Mortgage Index", "Electronic Money Input", "Equity Market Indicator"],
+            "4. Housing finance companies mainly provide:": ["Car loans", "Home loans", "Business loans", "Education loans"],
+            "5. Fixed rate loans mean:": ["Interest changes yearly", "Interest remains constant", "No interest", "Variable repayment"]
+        }
+
+        correct_answers = {
+            "q1": "Property",
+            "q2": "Market interest rate",
+            "q3": "Equated Monthly Installment",
+            "q4": "Home loans",
+            "q5": "Interest remains constant"
+        }
+
+        run_quiz("quiz2", questions, correct_answers)
+
+    # -----------------------------
+    # QUIZ 3 – 5 QUESTIONS
+    # -----------------------------
+    elif quiz_option == "Quiz 3 – Investment Banking":
+
+        questions = {
+            "1. IPO stands for:": ["Initial Public Offer", "Internal Public Option", "Indian Portfolio Order", "Investment Public Office"],
+            "2. Investment banks deal primarily with:": ["Retail deposits", "Corporate finance", "Savings accounts", "Agricultural loans"],
+            "3. Underwriting means:": ["Selling insurance only", "Guaranteeing issue of securities", "Providing loans", "Managing deposits"],
+            "4. Mergers and acquisitions are part of:": ["Retail banking", "Corporate finance", "Microfinance", "Rural banking"],
+            "5. Alternative investments include:": ["Fixed deposits", "Hedge funds", "Savings account", "Recurring deposits"]
+        }
+
+        correct_answers = {
+            "q1": "Initial Public Offer",
+            "q2": "Corporate finance",
+            "q3": "Guaranteeing issue of securities",
+            "q4": "Corporate finance",
+            "q5": "Hedge funds"
+        }
+
+        run_quiz("quiz3", questions, correct_answers)
+
 
 
 
