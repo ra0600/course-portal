@@ -232,8 +232,9 @@ elif menu == "Assessment":
             doc=SimpleDocTemplate(pdf_file,pagesize=A4)
             styles=getSampleStyleSheet()
             elements=[]
+            elements.append(Paragraph("<b>Investment Banking & Financial Services</b>",styles["Title"]))
             elements.append(Paragraph("<b>Certificate of Assessment</b>",styles["Title"]))
-            elements.append(Spacer(1,0.5*inch))
+            elements.append(Spacer(1,2.5*inch))
             elements.append(Paragraph(f"Student Name: {student_name}",styles["Normal"]))
             elements.append(Paragraph(f"Student ID: {student_id}",styles["Normal"]))
             elements.append(Paragraph(f"Quiz: {quiz_option}",styles["Normal"]))
@@ -307,4 +308,5 @@ elif menu == "Admin Analytics":
         st.dataframe(result_df["quiz"].value_counts())
         st.subheader("All Results")
         st.dataframe(result_df)
+
 
