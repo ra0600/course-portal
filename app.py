@@ -1,9 +1,9 @@
 import streamlit as st
 import os
 
-st.set_page_config(page_title="Housing Finance Course Portal", layout="wide")
+st.set_page_config(page_title="Investment Banking & Financial Services Course Portal", layout="wide")
 st.markdown(
-    "<h1 style='text-align: center; color:#0A3D62;'>Housing Finance Course Portal</h1>",
+    "<h1 style='text-align: center; color:#0A3D62;'>Investment Banking & Financial Services Course Portal</h1>",
     unsafe_allow_html=True
 )
 
@@ -130,6 +130,7 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
+
 
 
 
