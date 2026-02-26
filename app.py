@@ -76,14 +76,26 @@ elif menu == "Case Study":
 elif menu == "Video Lectures":
     st.header("Video Lectures")
 
-    st.subheader("Introduction to Housing Finance")
-    st.video("https://www.youtube.com/watch?v=9Y7pK3k5QeA")
+    st.subheader("Leasing vs Hire Purchase")
+    st.video("https://youtu.be/Ktnr6fXrurc")
 
-    st.subheader("How Mortgage Markets Work")
-    st.video("https://www.youtube.com/watch?v=1F7kW4FqL6Y")
+    st.subheader("Factoring vs Forfaiting")
+    st.video("https://www.youtube.com/watch?v=tppLiwVukis")
 
-    st.subheader("Mortgage Risk and Financial Crisis Explanation")
-    st.video("https://www.youtube.com/watch?v=2nBPN-MKefA")
+    st.subheader("Role of Investment Banking")
+    st.video("https://youtu.be/qCgojEvwcOk")
+    
+    st.subheader("Introduction to the Indian Financial System")
+    st.video("https://youtu.be/CtoCQvO67u4")
+
+    st.subheader("Housing Finance in India")
+    st.video("https://youtu.be/-0YJ06Sq_Cs")
+    
+    st.subheader("The IPO Journey Explained")
+    st.video("https://youtu.be/U4f_V5Myph0")
+    
+    st.subheader("Alternative Investments")
+    st.video("https://youtu.be/MMMd3sNq5VY")
 # -----------------------------
 # Activities & References
 # -----------------------------
@@ -114,4 +126,5 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Upload reference book inside books folder to enable download.")
+
 
