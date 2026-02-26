@@ -22,11 +22,14 @@ if menu == "Course Overview":
     st.header("Course Overview")
     st.write("""
     This course covers:
+    - Indian Financial System
     - Housing finance systems
+    - Leasing & Hire Purchase
     - Mortgage markets
     - Risk management
     - Regulatory frameworks
     - Affordable housing finance
+    - Alternative Investments
     """)
 
 # -----------------------------
@@ -128,6 +131,7 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
+
 
 
 
