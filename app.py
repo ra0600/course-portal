@@ -76,15 +76,14 @@ elif menu == "Case Study":
 elif menu == "Video Lectures":
     st.header("Video Lectures")
 
-    st.subheader("Module 1 Introduction")
-    st.video("PASTE_YOUR_YOUTUBE_LINK_HERE")
+    st.subheader("Introduction to Housing Finance")
+    st.video("https://www.youtube.com/watch?v=9Y7pK3k5QeA")
 
-    st.subheader("Mortgage Market Explanation")
-    st.video("PASTE_SECOND_VIDEO_LINK")
+    st.subheader("How Mortgage Markets Work")
+    st.video("https://www.youtube.com/watch?v=1F7kW4FqL6Y")
 
-    st.subheader("Risk Management in Housing Finance")
-    st.video("PASTE_THIRD_VIDEO_LINK")
-
+    st.subheader("Mortgage Risk and Financial Crisis Explanation")
+    st.video("https://www.youtube.com/watch?v=2nBPN-MKefA")
 # -----------------------------
 # Activities & References
 # -----------------------------
@@ -115,3 +114,4 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Upload reference book inside books folder to enable download.")
+
