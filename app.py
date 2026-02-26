@@ -51,7 +51,7 @@ st.markdown("Welcome to the IBFS academic portal. Access modules, videos, case s
 # Sidebar Navigation
 menu = st.sidebar.selectbox(
     "Select Section",
-    ["Course Overview", "Modules", "Case Study", "Video Lectures", "Activities & References"]
+    ["Course Overview", "Modules", "Case Study", "Video Lectures", "Activities & References", "Quiz"]
 )
 
 # -----------------------------
@@ -171,4 +171,5 @@ elif menu == "Activities & References":
             )
     else:
         st.info("Reference book not uploaded yet.")
+
 
