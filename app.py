@@ -172,6 +172,7 @@ elif menu == "Activities & References":
 # ASSESSMENT
 # =============================
 elif menu == "Assessment":
+    st.header("Course Assessment")
 
     quiz_option = st.selectbox(
         "Select Quiz",
@@ -179,7 +180,7 @@ elif menu == "Assessment":
     )
 
     student_name = st.text_input("Student Name")
-    student_id = st.text_input("Student ID")
+    student_id = st.text_input("Student RRN")
 
     if "quiz_data" not in st.session_state:
         st.session_state.quiz_data = {}
@@ -336,6 +337,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
