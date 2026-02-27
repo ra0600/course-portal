@@ -19,7 +19,7 @@ if not os.path.exists(VISIT_FILE):
     pd.DataFrame(columns=["timestamp"]).to_csv(VISIT_FILE, index=False)
 
 if not os.path.exists(RESULT_FILE):
-    pd.DataFrame(columns=["timestamp","quiz","student_name","student_id","score"]).to_csv(RESULT_FILE, index=False)
+    pd.DataFrame(columns=["timestamp","quiz","student_name","student_RRN","score"]).to_csv(RESULT_FILE, index=False)
 
 # Record visit
 visit_df = pd.read_csv(VISIT_FILE)
@@ -337,6 +337,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
