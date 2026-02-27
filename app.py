@@ -180,7 +180,7 @@ elif menu == "Assessment":
     )
 
     student_name = st.text_input("Student Name")
-    student_id = st.text_input("Student RRN")
+    student_RRN = st.text_input("Student RRN")
 
     if "quiz_data" not in st.session_state:
         st.session_state.quiz_data = {}
@@ -198,7 +198,7 @@ elif menu == "Assessment":
                 answers[f"q{i+1}"] = st.radio(q,opts,key=f"{quiz_key}_{i}")
 
             if st.button("Submit Quiz"):
-                if student_name=="" or student_id=="":
+                if student_name=="" or student_RRN=="":
                     st.warning("Enter student details")
                 else:
                     score=0
@@ -216,7 +216,7 @@ elif menu == "Assessment":
                         "timestamp":datetime.now(),
                         "quiz":quiz_key,
                         "student_name":student_name,
-                        "student_id":student_id,
+                        "student_RRN":student_RRN,
                         "score":score
                     }])
                     result_df=pd.concat([result_df,new_row],ignore_index=True)
@@ -337,6 +337,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
