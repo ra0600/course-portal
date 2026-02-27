@@ -238,7 +238,7 @@ elif menu == "Assessment":
             elements.append(Paragraph("<b>Certificate of Assessment</b>",styles["Title"]))
             elements.append(Spacer(1,1*inch))
             elements.append(Paragraph(f"Student Name: {student_name}",styles["Normal"]))
-            elements.append(Paragraph(f"Student ID: {student_RRN}",styles["Normal"]))
+            elements.append(Paragraph(f"Student ID: {student RRN}",styles["Normal"]))
             elements.append(Paragraph(f"Quiz: {quiz_option}",styles["Normal"]))
             elements.append(Paragraph(f"Score: {score}/{total}",styles["Normal"]))
             doc.build(elements)
@@ -337,6 +337,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
