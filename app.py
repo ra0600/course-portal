@@ -235,21 +235,107 @@ elif menu == "Assessment":
             st.success(f"Score: {score}/{total}")
 
             # Generate PDF
-            pdf_file=f"{quiz_key}_certificate.pdf"
-            doc=SimpleDocTemplate(pdf_file,pagesize=A4)
-            styles=getSampleStyleSheet()
-            elements=[]
-            elements.append(Paragraph("<b>Investment Banking & Financial Services</b>",styles["Title"]))
-            elements.append(Paragraph("<b>Certificate of Assessment</b>",styles["Title"]))
-            elements.append(Spacer(1,1*inch))
-            elements.append(Paragraph(f"Student Name: {student_name}",styles["Normal"]))
-            elements.append(Paragraph(f"Student RRN: {student_RRN}",styles["Normal"]))
-            elements.append(Paragraph(f"Quiz: {quiz_option}",styles["Normal"]))
-            elements.append(Paragraph(f"Score: {score}/{total}",styles["Normal"]))
+            # =========================
+            # PREMIUM CERTIFICATE
+            # =========================
+            
+            percentage = (score / total) * 100
+            
+            if percentage >= 75:
+                grade = "Distinction"
+            elif percentage >= 60:
+                grade = "First Class"
+            elif percentage >= 50:
+                grade = "Second Class"
+            else:
+                grade = "Pass"
+            
+            certificate_id = str(uuid.uuid4())[:8].upper()
+            
+            pdf_file = f"{quiz_key}_certificate.pdf"
+            doc = SimpleDocTemplate(pdf_file, pagesize=landscape(A4))
+            
+            elements = []
+            styles = getSampleStyleSheet()
+            
+            gold_title = ParagraphStyle(
+                name="GoldTitle",
+                parent=styles["Title"],
+                alignment=TA_CENTER,
+                fontSize=28,
+                textColor=colors.HexColor("#B8860B")
+            )
+            
+            center_style = ParagraphStyle(
+                name="Center",
+                parent=styles["Normal"],
+                alignment=TA_CENTER,
+                fontSize=16
+            )
+            
+            big_name = ParagraphStyle(
+                name="BigName",
+                parent=styles["Normal"],
+                alignment=TA_CENTER,
+                fontSize=24,
+                textColor=colors.darkblue
+            )
+            
+            elements.append(Spacer(1, 0.5*inch))
+            elements.append(Paragraph("Investment Banking & Financial Services", gold_title))
+            elements.append(Spacer(1, 0.3*inch))
+            elements.append(Paragraph("Certificate of Achievement", center_style))
+            elements.append(Spacer(1, 0.5*inch))
+            
+            elements.append(Paragraph("This is proudly awarded to", center_style))
+            elements.append(Spacer(1, 0.3*inch))
+            
+            elements.append(Paragraph(f"<b>{student_name}</b>", big_name))
+            elements.append(Spacer(1, 0.2*inch))
+            
+            elements.append(Paragraph(f"Student RRN: {student_RRN}", center_style))
+            elements.append(Spacer(1, 0.3*inch))
+            
+            elements.append(Paragraph(
+                f"For successfully completing {quiz_option} with a score of {score}/{total}.",
+                center_style
+            ))
+            
+            elements.append(Spacer(1, 0.4*inch))
+            elements.append(Paragraph(f"Grade Awarded: <b>{grade}</b>", center_style))
+            elements.append(Spacer(1, 0.4*inch))
+            elements.append(Paragraph(f"Certificate ID: {certificate_id}", center_style))
+            elements.append(Spacer(1, 0.3*inch))
+            elements.append(Paragraph(f"Date: {datetime.now().strftime('%d %B %Y')}", center_style))
+            elements.append(Spacer(1, 0.8*inch))
+            
+            signature_data = [
+                ["__________________________", "__________________________"],
+                ["Course Coordinator", "Authorized Signatory"]
+            ]
+            
+            table = Table(signature_data, colWidths=[3*inch, 3*inch])
+            table.setStyle(TableStyle([
+                ('ALIGN', (0,0), (-1,-1), 'CENTER')
+            ]))
+            
+            elements.append(table)
+            elements.append(Spacer(1, 0.5*inch))
+            
+            qr_code = qr.QrCodeWidget(f"Certificate ID: {certificate_id}")
+            bounds = qr_code.getBounds()
+            size = 100
+            width = bounds[2] - bounds[0]
+            height = bounds[3] - bounds[1]
+            drawing = Drawing(size, size, transform=[size/width,0,0,size/height,0,0])
+            drawing.add(qr_code)
+            
+            elements.append(drawing)
+            
             doc.build(elements)
-
-            with open(pdf_file,"rb") as f:
-                st.download_button("Download PDF Certificate",f,file_name=pdf_file)
+            
+            with open(pdf_file, "rb") as f:
+                st.download_button("Download Premium Certificate", f, file_name=pdf_file)
 
             if st.button("Reset Quiz"):
                 st.session_state.quiz_data[quiz_key]["submitted"]=False
@@ -342,6 +428,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
