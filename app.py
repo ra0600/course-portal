@@ -235,8 +235,8 @@ elif menu == "Assessment":
             st.success(f"Score: {score}/{total}")
 
             # Generate PDF
-           # =========================
-        # ONE PAGE CERTIFICATE WITH SIDE QR
+      # =========================
+        # ONE PAGE CERTIFICATE WITH QR TOP LEFT
         # =========================
         
         percentage = (score / total) * 100
@@ -282,55 +282,57 @@ elif menu == "Assessment":
         )
         
         # -----------------------------
-        # Left Side Certificate Content
-        # -----------------------------
-        certificate_content = []
-        
-        certificate_content.append(Paragraph("Investment Banking & Financial Services", gold_title))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph("Certificate of Achievement", center_style))
-        certificate_content.append(Spacer(1, 0.4*inch))
-        certificate_content.append(Paragraph("This certificate is proudly presented to", center_style))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph(f"<b>{student_name}</b>", big_name))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph(f"Student RRN: {student_RRN}", center_style))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph(
-            f"For successfully completing {quiz_option} with a score of {score}/{total}.",
-            center_style
-        ))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph(f"Grade Awarded: <b>{grade}</b>", center_style))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph(f"Certificate ID: {certificate_id}", center_style))
-        certificate_content.append(Spacer(1, 0.3*inch))
-        certificate_content.append(Paragraph(f"Date: {datetime.now().strftime('%d %B %Y')}", center_style))
-        
-        # -----------------------------
         # QR Code
         # -----------------------------
         qr_code = qr.QrCodeWidget(f"Certificate ID: {certificate_id}")
         bounds = qr_code.getBounds()
-        size = 140
+        size = 90
         width = bounds[2] - bounds[0]
         height = bounds[3] - bounds[1]
-        drawing = Drawing(size, size, transform=[size/width,0,0,size/height,0,0])
-        drawing.add(qr_code)
+        qr_drawing = Drawing(size, size, transform=[size/width,0,0,size/height,0,0])
+        qr_drawing.add(qr_code)
         
         # -----------------------------
-        # Create Side by Side Layout
+        # Header Row with QR
         # -----------------------------
-        main_table = Table(
-            [[certificate_content, drawing]],
-            colWidths=[7*inch, 2.5*inch]
+        header_table = Table(
+            [[qr_drawing, Paragraph("", styles["Normal"])]],
+            colWidths=[1.5*inch, 9*inch]
         )
         
-        main_table.setStyle(TableStyle([
-            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ]))
+        elements.append(header_table)
+        elements.append(Spacer(1, 0.3*inch))
         
-        elements.append(main_table)
+        # -----------------------------
+        # Certificate Content
+        # -----------------------------
+        elements.append(Paragraph("Investment Banking & Financial Services", gold_title))
+        elements.append(Spacer(1, 0.3*inch))
+        elements.append(Paragraph("Certificate of Achievement", center_style))
+        elements.append(Spacer(1, 0.5*inch))
+        
+        elements.append(Paragraph("This certificate is proudly presented to", center_style))
+        elements.append(Spacer(1, 0.4*inch))
+        
+        elements.append(Paragraph(f"<b>{student_name}</b>", big_name))
+        elements.append(Spacer(1, 0.3*inch))
+        
+        elements.append(Paragraph(f"Student RRN: {student_RRN}", center_style))
+        elements.append(Spacer(1, 0.3*inch))
+        
+        elements.append(Paragraph(
+            f"For successfully completing {quiz_option} with a score of {score}/{total}.",
+            center_style
+        ))
+        elements.append(Spacer(1, 0.3*inch))
+        
+        elements.append(Paragraph(f"Grade Awarded: <b>{grade}</b>", center_style))
+        elements.append(Spacer(1, 0.3*inch))
+        
+        elements.append(Paragraph(f"Certificate ID: {certificate_id}", center_style))
+        elements.append(Spacer(1, 0.3*inch))
+        
+        elements.append(Paragraph(f"Date: {datetime.now().strftime('%d %B %Y')}", center_style))
         
         doc.build(elements)
         
@@ -427,6 +429,7 @@ elif menu == "Admin Analytics":
         if st.button("Logout Admin"):
             st.session_state.admin_authenticated = False
             st.rerun()
+
 
 
 
